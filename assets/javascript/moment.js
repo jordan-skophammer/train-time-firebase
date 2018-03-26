@@ -1,4 +1,4 @@
-$(document).ready(function{
+$(document).ready(function() {
 
 	var config = {
 	    apiKey: "AIzaSyAozjWY5VG4mrX1xUGE9kMb88rtBgO6nCI",
@@ -11,9 +11,38 @@ $(document).ready(function{
 
   	firebase.initializeApp(config);
 
+  	var database = firebase.database();
 
+  	var trainNumber = 1;
+
+  	$("#submit-train").on("click", function() {
+
+  		var inputTrain = $("#Train-Name").val().trim();
+  		var inputDestination = $("#Destination").val().trim();
+  		var inputFirstTrainTime = $("#First-Train-Time").val().trim();
+  		var inputFreqency = $("#Freqency").val().trim();
+
+  		console.log(inputTrain)
+
+  		database.ref().set({
+  			fbTrainNumber:{ 
+  				trainNumber: {
+	  				fbTrainTime: inputTrain,
+		  			fbDestination: inputDestination,
+		  			fbFistTrainTime: inputFirstTrainTime,
+		  			fbFreqency: inputFreqency
+	  			}
+  			}
+  		})
+  		
+  		trainNumber++;
+  	})
 
 
 
 
 })
+
+//save user input to object
+//save input object to firebase
+//display firebase object on html table
