@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   	var database = firebase.database();
 
-  	var trainNumber = 1;
+  	var trainCounter = 1;
 
   	$("#submit-train").on("click", function() {
 
@@ -24,18 +24,15 @@ $(document).ready(function() {
 
   		console.log(inputTrain)
 
-  		database.ref().set({
-  			fbTrainNumber:{ 
-  				trainNumber: {
-	  				fbTrainTime: inputTrain,
-		  			fbDestination: inputDestination,
-		  			fbFistTrainTime: inputFirstTrainTime,
-		  			fbFreqency: inputFreqency
-	  			}
-  			}
+  		database.ref().push({
+				fbTrainTime: inputTrain,
+  			fbDestination: inputDestination,
+  			fbFistTrainTime: inputFirstTrainTime,
+  			fbFreqency: inputFreqency,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
   		})
-  		
-  		trainNumber++;
+
+  		trainCounter++;
   	})
 
 
